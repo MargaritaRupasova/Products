@@ -31,7 +31,7 @@ public class ProductManagerTest {
     }
 
     @Test
-    public void toFindProductIfBeOneProduct() {
+    public void toFindProductIfBeOnlyOneProduct() {
         ProductRepository repo = new ProductRepository();
         ProductManager manager = new ProductManager(repo);
 
@@ -81,7 +81,7 @@ public class ProductManagerTest {
     }
 
     @Test
-    public void toFindProductIfBeLastProduct() {
+    public void toFindProductIfBeNoProduct() {
         ProductRepository repo = new ProductRepository();
         ProductManager manager = new ProductManager(repo);
 
@@ -99,8 +99,8 @@ public class ProductManagerTest {
         manager.add(smartphone2);
         manager.add(smartphone3);
 
-        Product[] expected = {smartphone3};
-        Product[] actual = manager.searchBy("Umidigi");
+        Product[] expected = {};
+        Product[] actual = manager.searchBy("Tolstoy");
 
         Assertions.assertArrayEquals(expected, actual);
     }
