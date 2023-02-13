@@ -48,5 +48,41 @@ public class ProductRepositoryTest {
 
     }
 
+    @Test
+    public void correctDeletionById() {
+        ProductRepository repo = new ProductRepository();
+
+        repo.save(book1);
+        repo.save(book2);
+        repo.save(book3);
+        repo.save(smartphone1);
+        repo.save(smartphone2);
+        repo.save(smartphone3);
+        repo.removeById(322);
+
+        Product[] expected = {book1, book2, book3, smartphone1, smartphone3};
+        Product[] actual = repo.findAll();
+
+        Assertions.assertArrayEquals(expected, actual);
+
+    }
+
+    @Test
+    public void noCorrectDeletionById() {
+        ProductRepository repo = new ProductRepository();
+
+        repo.save(book1);
+        repo.save(book2);
+        repo.save(book3);
+        repo.save(smartphone1);
+        repo.save(smartphone2);
+        repo.save(smartphone3);
+
+        Assertions.assertThrows(NotFoundException.class,
+                () -> repo.removeById(321)
+        );
+
+    }
+
 
 }

@@ -17,7 +17,20 @@ public class ProductRepository {
         return products;
     }
 
+    public Product findById(int id) {
+        for (Product product:products) {
+            if (product.getId() == id) {
+                return product;
+            }
+        }
+        return null;
+    }
+
     public void removeById(int id) {
+        Product productFounded = findById(id);
+        if (productFounded == null) {
+            throw new NotFoundException(id);
+        }
         Product[] tmp = new Product[products.length - 1];
         int copyToIndex = 0;
         for (Product product : products) {
